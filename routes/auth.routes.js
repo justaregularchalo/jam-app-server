@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken")
 
+const isTokenOk = require("../middlewares/auth.middleware")
+
 
 
 //POST "/auth/signup" => registro de usuario lo crea en la DB
@@ -138,15 +140,52 @@ router.post("/login", async (req,res,next)=>{
             res.status(400).json({errorMessage: "Password doesn't match"})
 
         }
-
-
-    }catch (error){
-
+        
+        // si tutto bene, creamos la session con el token
+        
+        //payload maligno => info que no cambia
+        1
+        const payload = {
+    
+            _id: foundUser._id,
+            email: foundUser.email,
+            role: foundUser.role
+    
+        }
+    
+        const authToken = jwt.sign(payload,process.env.TOKEN_SECRET, {expiresIn:'3d'})
+        res.json({authToken})
+    
+    
+    
+    
+    }catch(error){
+        
         next(error)
     }
+})
+    
 
-    // si tutto bene, creamos la session con el token
 
+
+
+
+
+// GET "/auth/verify" => indicar a FE si el user esta activo, papi y quien es
+
+
+
+router.get("/verify",isTokenOk , (req,res,next)=>{
+    console.log(req.payload)
+    //validar
+    // recibir payload
+    //envia el payload
+    // sattus de usuario
+    // logged or not
+
+
+    res.json({payload:req.payload})
+    // se envia esto para que react sepa quien ha entrado
 
 
 
@@ -158,7 +197,6 @@ router.post("/login", async (req,res,next)=>{
 
 
 
-// GET "/auth/verify" => indicar a FE si el user esta activo, papi y quien es
 
 
 
@@ -169,10 +207,4 @@ router.post("/login", async (req,res,next)=>{
 
 
 
-
-
-
-
-
-
-module.exports = router;
+module.exports = router

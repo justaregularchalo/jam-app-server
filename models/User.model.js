@@ -36,6 +36,14 @@ const userSchema = new Schema(
 
     vidProfile : String,
 
+    role: {
+
+      type: String,
+      enum:["user", "admin"],
+      default: "user"
+
+    },
+
 
 
 
