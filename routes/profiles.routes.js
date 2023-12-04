@@ -82,37 +82,37 @@ router.put("/:userId", async (req,res,next)=>{
 
 
 
-//GET "api/profile/my-profile"  ver los detalles de mi perfil
+// //GET "api/profile/my-profile"  ver los detalles de mi perfil
 
 
-router.get ("/my-profile" , async (req,res,next)=>{
+// router.get ("/my-profile" , async (req,res,next)=>{
 
 
 
-    try{
+//     try{
 
        
 
-        if (req.payload.userId.length !== 24) {
+//         if (req.payload.userId.length !== 24) {
 
-            return res.status(400).json({errorMessage: "id not valid"})
-        }
+//             return res.status(400).json({errorMessage: "id not valid"})
+//         }
 
-        const oneUser = await User.findById(req.payload.userId)
-        console.log(oneUser)
-        res.json(oneUser)
-
-
-
-    }catch(error){
-
-        next(error)
-
-    }
+//         const oneUser = await User.findById(req.payload.userId)
+//         console.log(oneUser)
+//         res.json(oneUser)
 
 
 
-})
+//     }catch(error){
+
+//         next(error)
+
+//     }
+
+
+
+// })
 
 
 

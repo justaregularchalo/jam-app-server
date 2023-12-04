@@ -16,5 +16,8 @@ router.use("/all-users", allUserRoutes);
 const profileRoutes = require("./profiles.routes");
 router.use("/profile", profileRoutes);
 
+const myProfileRoutes = require("./myprofile.routes");
+router.use("/my-profile", myProfileRoutes);
+
 
 module.exports = router;
