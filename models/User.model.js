@@ -14,6 +14,8 @@ const userSchema = new Schema(
 
     },
 
+    //añadir nombre
+
     email: {
       type: String,
       required: [true, 'Email is required.'],
@@ -25,6 +27,8 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
+
+    bio: String,
 
     instrument: String,
 
