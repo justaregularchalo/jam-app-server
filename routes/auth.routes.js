@@ -109,7 +109,7 @@ try {
 
 //POST "/login" => recibir datos y validar
 
-router.post("/login", async (req,res,next)=>{
+router.post("/", async (req,res,next)=>{
 
     console.log(req.body)
 

@@ -6,16 +6,14 @@ const isTokenOk = require("../middlewares/auth.middleware")
 
 
 
-// /GET "api/profile/my-profile"  ver los detalles de mi perfil
-
- 
+// /GET "api/profile/my-profile"  ver los detalles de mi perfil 
 router.get ("/" , isTokenOk, async (req,res,next)=>{
 
         console.log(req.payload)
 
     try{
+        //hacer constante y traer parametors a red.body
 
-       
 
         if (req.payload._id.length !== 24) {
 
@@ -37,6 +35,8 @@ router.get ("/" , isTokenOk, async (req,res,next)=>{
 
 
 })
+
+
 
 module.exports = router;
 

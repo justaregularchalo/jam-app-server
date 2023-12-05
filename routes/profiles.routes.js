@@ -58,13 +58,13 @@ router.put("/:userId", async (req,res,next)=>{
 
     const {userId} = req.params //destructuramos para recibir toda la info de lo que vamosa a actualizar
 
-    const {bio, picProfile, vidProfile} = req.body //esto es lo que vamos a actualizar
+    const {bio, instrument, genre, username, location,  picProfile, vidProfile} = req.body //esto es lo que vamos a actualizar
 
     console.log(req.params, req.body)
 
     try {
 
-        await User.findByIdAndUpdate(userId, {bio, picProfile, vidProfile})   
+        await User.findByIdAndUpdate(userId, {bio, instrument, genre, username, location,  picProfile, vidProfile})   
         res.json ("Profile Updated") 
 
 
