@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/User.model");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const imgMiddleware = require("../middlewares/cloudinary.middleware");
 
 const isTokenOk = require("../middlewares/auth.middleware");
 
@@ -25,15 +25,14 @@ router.get("/", isTokenOk, async (req, res, next) => {
   }
 });
 
-router.post("/edited-image", isTokenOk, CloudinaryStorage, async (req, res, next)=>{
+router.patch("/edited-image", isTokenOk, imgMiddleware.single("image"), async (req, res, next)=>{
+    const { path } = req.file //destructuramos para recibir toda la info de lo que vamosa a actualizar
+    console.log(req.file.path)
 
-    const {uploadImage} = req.file.path //destructuramos para recibir toda la info de lo que vamosa a actualizar
-
-    const {picProfile} = req.body //
 
     try{
-        await User.findByIdAndUpdate(uploadImage, {picProfile})   
-        res.json ("Profile Updated") 
+        await User.findByIdAndUpdate(req.payload._id, {picProfile:path})   
+        res.json({ imageUrl: req.file.path })
 
     } catch(err){
 next(err)
