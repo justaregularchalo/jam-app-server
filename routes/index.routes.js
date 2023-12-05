@@ -22,5 +22,8 @@ router.use("/profile", profileRoutes);
 const myProfileRoutes = require("./myprofile.routes");
 router.use("/my-profile", myProfileRoutes);
 
+const commentRoutes = require("./comment.routes");
+router.use("/comment", commentRoutes);
+
 
 module.exports = router;
