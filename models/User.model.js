@@ -38,7 +38,7 @@ const userSchema = new Schema(
 
     picProfile: String, // cloudinary
 
-    vidProfile : String,
+    vidProfile : String, // cloudinary
 
     role: {
 
