@@ -26,4 +26,8 @@ const commentRoutes = require("./comment.routes");
 router.use("/comment", commentRoutes);
 
 
+const messageRoutes = require("./messages.routes");
+router.use("/messages", messageRoutes );
+
+
 module.exports = router;

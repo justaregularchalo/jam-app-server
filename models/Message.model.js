@@ -1,20 +1,20 @@
 const { Schema, model } = require("mongoose");
 
-const commentSchema = new Schema(
+const messageSchema = new Schema(
   {
-    commenter: {
+    sender: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
 
-    user: {
+    receiver: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
 
-    comment: String,
+    message: String,
   },
 
   {
@@ -23,6 +23,6 @@ const commentSchema = new Schema(
   }
 );
 
-const Comment = model("Comment", commentSchema);
+const Message = model("Message", messageSchema);
 
-module.exports = Comment;
+module.exports = Message;

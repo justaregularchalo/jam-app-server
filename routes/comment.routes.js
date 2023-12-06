@@ -2,6 +2,7 @@
 const router = require ("express"). Router ()
 const User = require ("../models/User.model")
 const Comment = require ("../models/Comment.model")
+const isTokenOk = require("../middlewares/auth.middleware")
 
 
 //ruta para publicar un comentario
@@ -59,5 +60,8 @@ router.get("/:userId", async (req,res,next)=>{
 
 
 })
+
+
+
 
 module.exports = router;
