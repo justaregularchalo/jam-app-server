@@ -1,5 +1,6 @@
 const router = require ("express"). Router ()
 const Message = require ("../models/Message.model")
+const User = require ("../models/User.model")
 const isTokenOk = require("../middlewares/auth.middleware")
 
 
@@ -36,7 +37,7 @@ router.post ("/:userId", async (req,res,next) =>{
 })
 
 
-// ruta para ver los coments en la vista de mensajes
+// ruta para ver los mensajes
 router.get("/:userId", async (req,res,next)=>{
 
     
@@ -44,6 +45,11 @@ router.get("/:userId", async (req,res,next)=>{
     try {
 
         const message = await Message.find({ userId: req.body._id });
+
+        // const message = await User.findById(userId).populate(req.body.username);  
+        
+        // const message = await Message.findById(userId).populate(sender.username);  
+
         res.json (message) 
 
 

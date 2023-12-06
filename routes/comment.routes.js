@@ -16,7 +16,7 @@ router.post("/:userId", async (req,res,next)=>{
 
         await Comment.create ({
     
-            commenter,
+            commenter,//utilizar el payload
             user,
             comment
     
@@ -43,11 +43,13 @@ router.post("/:userId", async (req,res,next)=>{
 // ruta para ver los comentarios en el user profile
 router.get("/:userId", async (req,res,next)=>{
 
-    
+    console.log(req.params.userId, "AQUIIIIII")
 
     try {
 
-        const comment = await Comment.find({ userId: req.body._id });
+        const comment = await Comment.find({ user:req.params.userId });
+        console.log(comment)
+
         res.json (comment) 
 
 
