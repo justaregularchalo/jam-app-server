@@ -39,4 +39,16 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+router.delete("/:commentId", async (req,res,next)=>{
+    console.log(req.params.commentId, "AQUIIIIII");
+    try {
+
+        await Comment.findByIdAndDelete(req.params.commentId)
+        res.json("Comment Eliminated")
+    }catch(error){
+
+        next(error)
+    }
+})
+
 module.exports = router;
