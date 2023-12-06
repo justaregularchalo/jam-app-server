@@ -22,6 +22,7 @@ router.post ("/:userId", async (req,res,next) =>{
 
             })
 
+            res.status(201).json ("Message Created")
 
         }catch(error){
 
@@ -33,6 +34,30 @@ router.post ("/:userId", async (req,res,next) =>{
 
 
 })
+
+
+// ruta para ver los coments en la vista de mensajes
+router.get("/:userId", async (req,res,next)=>{
+
+    
+
+    try {
+
+        const message = await Message.find({ userId: req.body._id });
+        res.json (message) 
+
+
+
+    }catch(error){
+
+        next(error)
+    }
+
+
+
+})
+
+
 
 
 module.exports = router;
