@@ -45,14 +45,21 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// router.delete("/:messageId", async (req, res, next) => {
+
+//borrar messagios
+router.delete("/message/:messageId", async (req, res, next) => {
     
-//     try {
+    try {
+
+      console.log("ID MALIGNOOOOOO!!:", req.params.messageId);
+      await Message.findByIdAndDelete(req.params.messageId)
+      res.json("Message Deleted")
 
 
-//     } catch (error) {
-//       next(error);
-//     }
-//   });
+    } catch (error) {
+  
+      next(error);
+    }
+  });
 
 module.exports = router;
