@@ -5,6 +5,7 @@ const isTokenOk = require("../middlewares/auth.middleware");
 
 //ruta para  publicar un mensaje
 
+
 router.post("/:userId", async (req, res, next) => {
   const { sender, receiver, message } = req.body;
 
@@ -22,15 +23,15 @@ router.post("/:userId", async (req, res, next) => {
 });
 
 // ruta para ver los mensajes
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId", isTokenOk, async (req, res, next) => {
   console.log(req.params.userId, "AQUIIIIII");
   try {
-    const message = await Message.find({
-      $and: [{ receiver: req.params.userId }],
-    }).populate("sender", "username").populate("receiver", "username");;
+    const message = await Message.find({ 
+      $and: [{ receiver: req.params.userId }, { sender: req.payload._id }],
+    }).populate("sender", "username").populate("receiver", "username");
 
     const messageBack = await Message.find({
-      $and: [{ sender: req.params.userId }],
+      $and: [{ sender: req.params.userId }, { receiver: req.payload._id }],
     }).populate("receiver", "username").populate("sender", "username");
 
     const allMessages = [...message, ...messageBack].sort(
