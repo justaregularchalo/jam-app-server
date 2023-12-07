@@ -23,26 +23,36 @@ router.post("/:userId", async (req, res, next) => {
 
 // ruta para ver los mensajes
 router.get("/:userId", async (req, res, next) => {
-    console.log(req.params.userId, "AQUIIIIII");
+  console.log(req.params.userId, "AQUIIIIII");
   try {
-    const message = await Message.find({ receiver: req.params.userId }).populate(
-      "sender",
-      "username"
+    const message = await Message.find({
+      $and: [{ receiver: req.params.userId }],
+    }).populate("sender", "username").populate("receiver", "username");;
+
+    const messageBack = await Message.find({
+      $and: [{ sender: req.params.userId }],
+    }).populate("receiver", "username").populate("sender", "username");
+
+    const allMessages = [...message, ...messageBack].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
     );
 
-    const messageBack = await Message.find({ sender: req.params.userId }).populate(
-        "receiver",
-        "username"
-      );
-
-      const allMessages = [...message, ...messageBack]
-      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-
-    console.log(message);
+    console.log("QUE PASAAAAAAAAAA", message);
+    console.log("BAAAAACK", messageBack)
     res.json(allMessages);
   } catch (error) {
     next(error);
   }
 });
+
+// router.delete("/:messageId", async (req, res, next) => {
+    
+//     try {
+
+
+//     } catch (error) {
+//       next(error);
+//     }
+//   });
 
 module.exports = router;
