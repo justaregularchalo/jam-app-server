@@ -51,7 +51,7 @@ router.delete("/message/:messageId", async (req, res, next) => {
     
     try {
 
-      console.log("ID MALIGNOOOOOO!!:", req.params.messageId);
+      // console.log("ID MALIGNOOOOOO!!:", req.params.messageId);
       await Message.findByIdAndDelete(req.params.messageId)
       res.json("Message Deleted")
 

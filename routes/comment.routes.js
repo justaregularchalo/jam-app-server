@@ -39,7 +39,7 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-router.delete("/:userId", async (req,res,next)=>{
+router.delete("/comment/:commentId", async (req,res,next)=>{
     console.log(req.params.commentId, "AQUIIIIII");
     try {
 
